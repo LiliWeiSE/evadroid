@@ -1,0 +1,10 @@
+#myapp li {
+	margin-bottom: 20px;
+}
+.score {
+	margin-top: 5px;
+	display: block;
+}
+.time {
+	float: right;
+}

@@ -21,7 +21,7 @@ public class User {
 			String password) throws Exception {
 		int id = 0;
 		DBQ dbq = new DBQ(
-				"INSERT INTO user (type, email, name, password, credit) VALUES (?, ?, ?, ?, ?, ?)");
+				"INSERT INTO user (type, email, name, password, credit) VALUES (?, ?, ?, ?, ?)");
 		dbq.set(type);
 		dbq.set(email);
 		dbq.set(name);
@@ -36,7 +36,8 @@ public class User {
 			}
 		} catch (Exception e) {
 			dbq.close();
-			return null;
+			//return null;
+			throw(e);
 		}
 		id = dbq.getGK().get(0);
 		dbq.close();

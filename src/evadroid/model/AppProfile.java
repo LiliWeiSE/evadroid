@@ -1,6 +1,6 @@
 package evadroid.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class AppProfile {
 	private int id;

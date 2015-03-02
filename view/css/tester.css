@@ -1,0 +1,8 @@
+.score {
+	margin-top: 5px;
+	margin-bottom: 20px;
+	display: block;
+}
+.time {
+	float: right;
+}

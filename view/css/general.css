@@ -1,0 +1,30 @@
+* {
+	margin: 0;
+	font-family: "Microsoft Yahei";
+}
+a {
+	text-decoration: none;
+}
+ul {
+	list-style: none;
+}
+#navi {
+	background: #0078d8;
+}
+#navi ul, #navi a {
+	width: 1080px;
+	height: 50px;
+	margin: 0 auto;
+	color: #ffffff;
+	padding-left: 0;
+	line-height: 50px;
+	text-align: right;
+}
+#navi li {
+	display: inline-block;
+	margin-left: 10px;
+}
+.container {
+	width: 1080px;
+	margin: 40 auto;
+}

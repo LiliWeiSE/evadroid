@@ -1,0 +1,49 @@
+body {
+	background: #0078d8;
+}
+.container {
+	color: #ffffff;
+}
+#signin, #signup {
+	float: right;
+	padding-top: 60px;
+	padding-right: 150px;
+}
+#signin *, #signup * {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.textfield {
+	padding: 8px;
+	border-radius: 5px;
+	border:none;
+}
+.radio {
+	vertical-align: middle;
+	margin-right: 2px;
+}
+form {
+	font-size: 14px;
+}
+.button {
+	width: 149px;
+	height: 30px;
+	border-radius: 3px;
+	background: #0064B4;
+	border-width: 1px;
+	border-color: #0064B4;
+	color: #ffffff;
+}
+#left {
+	padding-top: 60px;
+	float: left;
+	font-size: 30px;
+}
+#tosignin, #tosignup {
+	display: inline-block;
+	float: right;
+	width: 52px;
+	background: url(../img/arrow.png) no-repeat right 68%;
+	margin: 0;
+	color: #ffffff;
+}
