@@ -17,7 +17,7 @@
 <body>
 	<div class="container">
 		<div id="left">EvaDroid</div>
-		<div id="signin" action="/signin">
+		<div id="signin" action="/signin/index.jsp">
 			<span>登录</span>
 			<a href="#signup" id="tosignup">注册</a>
 			<form method="post">

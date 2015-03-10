@@ -29,7 +29,7 @@ public class User {
 		dbq.set(0);
 
 		try {
-			if(dbq.excute() !=1)
+			if(dbq.excute() != 1)
 			{
 				dbq.close();
 				return null;
@@ -49,15 +49,22 @@ public class User {
 	public static User login(String username, String password) throws Exception {
 		UserProfile up = null;
 
-		DBQ dbq = new DBQ("SELECT * FROM user WHERE username=? AND password=?");
+		DBQ dbq = new DBQ("SELECT * FROM user WHERE name=? AND password=?");
 		dbq.set(username);
 		dbq.set(password);
-		ResultSet rs = dbq.query();
-
+		ResultSet rs = null;
+		try {
+			rs = dbq.query();
+		}
+		catch (Exception e) {
+			dbq.close();
+			throw(e);
+		}
+		
 		if (rs.next()) {
 			up = new UserProfile(rs.getInt("id"), rs.getInt("type"),
 					rs.getString("email"), rs.getString("name"),
-					rs.getString("password"), rs.getInt("point"));
+					rs.getString("password"), rs.getInt("credit"));
 		} else {
 			dbq.close();
 			return null;

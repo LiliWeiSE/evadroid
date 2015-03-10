@@ -17,7 +17,35 @@ public class App {
 	public void setAppProfile(AppProfile appProfile) {
 		this.appProfile = appProfile;
 	}
-	
+	public static App insertApp(AppProfile ap) throws Exception{
+		int id = 0;
+		DBQ dbq = new DBQ(
+				"INSERT INTO app (uid, name, description, url, icon, task, time, point) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+		dbq.set(ap.getUid());
+		dbq.set(ap.getName());
+		dbq.set(ap.getDescription());
+		dbq.set(ap.getUrl());
+		dbq.set(ap.getIcon());
+		dbq.set(ap.getTask());
+		dbq.set(ap.getTime());
+		dbq.set(ap.getPoint());
+		
+		try {
+			if(dbq.excute() != 1)
+			{
+				dbq.close();
+				return null;
+			}
+		} catch (Exception e) {
+			dbq.close();
+			//return null;
+			throw(e);
+		}
+		id = dbq.getGK().get(0);
+		dbq.close();
+		ap.setId(id);
+		return new App(ap);
+	}
 	public static App getAppById(int id) throws Exception {
 		DBQ dbq = new DBQ("SELECT * FROM app WHERE id=?");
 		dbq.set(id);
@@ -29,6 +57,7 @@ public class App {
 					new AppProfile(
 							rs.getInt("id"), 
 							rs.getInt("uid"),
+							rs.getString("name"),
 							rs.getString("description"),
 							rs.getString("url"),
 							rs.getString("icon"),
@@ -50,6 +79,7 @@ public class App {
 						new AppProfile(
 							rs.getInt("id"), 
 							rs.getInt("uid"),
+							rs.getString("name"),
 							rs.getString("description"),
 							rs.getString("url"),
 							rs.getString("icon"),
@@ -77,6 +107,7 @@ public class App {
 						new AppProfile(
 							rs.getInt("id"), 
 							rs.getInt("uid"),
+							rs.getString("name"),
 							rs.getString("description"),
 							rs.getString("url"),
 							rs.getString("icon"),

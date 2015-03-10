@@ -5,17 +5,31 @@ import java.sql.Date;
 public class AppProfile {
 	private int id;
 	private int uid;
+	private String name;
 	private String description;
 	private String url;
 	private String icon;
 	private String task;
 	private Date time;
 	private int point;
+	
+	public AppProfile() {
+		this.id = -1;
+		this.uid = -1;
+		this.name = null;
+		this.description = null;
+		this.url = null;
+		this.icon = null;
+		this.task = null;
+		this.time = null;
+		this.point = 0;
+	}
 
-	public AppProfile(int id, int uid, String description, String url,
+	public AppProfile(int id, int uid, String name, String description, String url,
 			String icon, String task, Date time, int point) {
 		this.id = id;
 		this.uid = uid;
+		this.name = name;
 		this.description = description;
 		this.url = url;
 		this.icon = icon;
@@ -38,6 +52,14 @@ public class AppProfile {
 
 	public void setUid(int uid) {
 		this.uid = uid;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {

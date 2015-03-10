@@ -15,19 +15,19 @@
 	boolean passwordMatch=false;
 	
 	User user = null;
+	String newLocn = null;
 	if(username != null && password != null && passwordcfm != null){
 		usernameValidate = RegisterValidate.validateUsername(username);
 		passwordValidate = RegisterValidate.validatePassword(password);
 		passwordMatch = RegisterValidate.validatePasswordMatch(password, passwordcfm);
 		if(usernameValidate && passwordValidate && passwordMatch) {
-			user = User.register(type, email, username, password);
 			try {
 				user = User.register(type, email, username, password);
 			}
 			catch(Exception e) {
 				//register failed
 				response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
-				String newLocn="../index.jsp";
+				newLocn="../index.jsp";
 				response.setHeader("Location",newLocn);
 			}
 		}
@@ -35,13 +35,13 @@
 	else {
 		//validation failed
 		response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
-		String newLocn="../index.jsp";
+		newLocn="../index.jsp";
 		response.setHeader("Location",newLocn);
 	}
 	if(user == null) {
 		//register failed
 		response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
-		String newLocn="../index.jsp";
+		newLocn="../index.jsp";
 		response.setHeader("Location",newLocn);
 	}
 	else {
@@ -49,7 +49,6 @@
 		session.setAttribute("user",user);
 		response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
 		
-		String newLocn = null;
 		if(type == 0)
 			newLocn="../myEvaTester.jsp";
 		else
