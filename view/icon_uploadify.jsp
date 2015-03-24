@@ -8,39 +8,17 @@
 <%@ page import = "evadroid.model.User"%>
 <%@ page import = "evadroid.model.UserProfile"%>
 <%@ page import = "evadroid.model.AppProfile"%>
+<%@ page import = "java.text.DateFormat"
+import = "java.text.SimpleDateFormat"
+import = "java.util.Date"%>
 
 <%
-   User user = null;
-   UserProfile profile = null;
-   AppProfile appProfile = null;
-   try {
-      user = (User)session.getAttribute("user");
-      profile = user.getUserProfile();
-   }
-   catch(Exception e) {
-      out.println("<script type=\"text/javascript\">");
-      out.println("alert(\"请重新登录！\")");   
-      out.println("location.href = 'index.jsp';");
-      out.println("</script>");
-      return;
-   }
-
-   try {
-      appProfile = (AppProfile)session.getAttribute("appProfile");
-   }
-   catch(Exception e) {
-      out.println("<script type=\"text/javascript\">");
-      out.println("alert(\"请重新上传！\")");   
-      out.println("location.href = 'upload.jsp';");
-      out.println("</script>");
-      return;
-   }
    File file ;
    int maxFileSize = 50000 * 1024;
    int maxMemSize = 50000 * 1024;
    ServletContext context = pageContext.getServletContext();
    //String filePath = context.getInitParameter("file-upload");
-   String filePath = context.getRealPath("/") + "/files/icon/";
+   String filePath = context.getRealPath("/") + "myFile/icon/";
    //String filePath = "/tmp/";
 
    // Verify the content type
@@ -51,7 +29,6 @@
       // maximum size that will be stored in memory
       factory.setSizeThreshold(maxMemSize);
       // Location to save data that is larger than maxMemSize.
-      //factory.setRepository(new File("c:\\temp"));
 
       // Create a new file upload handler
       ServletFileUpload upload = new ServletFileUpload(factory);
@@ -64,14 +41,7 @@
          // Process the uploaded file items
          Iterator i = fileItems.iterator();
 
-         out.println("<html>");
-         out.println("<head>");
-         out.println("<title>JSP File upload</title>");  
-         out.println("</head>");
-         out.println("<body>");
-         while ( i.hasNext () ) 
          {
-            out.println("inside while");
             FileItem fi = (FileItem)i.next();
             if ( !fi.isFormField () )  
             {
@@ -80,35 +50,14 @@
                String fileName = fi.getName();
                boolean isInMemory = fi.isInMemory();
                long sizeInBytes = fi.getSize();
-
-               // Write the file
-               //if( fileName.lastIndexOf("\\") >= 0 ){
-               //   file = new File( filePath + 
-               //  fileName.substring( fileName.lastIndexOf("\\"))) ;
-               //}else{
-               file = new File( filePath + 
-               fileName.substring( fileName.lastIndexOf("\\") + 1)) ;
-               //}
+               DateFormat df = new SimpleDateFormat("yyMMddHHmmss");
+               fileName = df.format(new Date()) + fileName.substring( fileName.lastIndexOf("\\") + 1);
+               file = new File(filePath + fileName);
                fi.write( file ) ;
-               appProfile.setIcon(filePath + fileName);
-               out.println("Uploaded Filename: " + filePath + 
-               fileName + "<br>");
-            }
+               out.print("myFile/icon/"+ fileName);
          }
-         out.println("</body>");
-         out.println("</html>");
       }catch(Exception ex) {
-         out.println("<br>");
-         out.println(ex);
       }
    }else{
-      out.println("<html>");
-      out.println("<head>");
-      out.println("<title>Servlet upload</title>");  
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<p>No file uploaded</p>"); 
-      out.println("</body>");
-      out.println("</html>");
    }
 %>

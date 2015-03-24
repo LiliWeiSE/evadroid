@@ -1,12 +1,36 @@
 * {
 	margin: 0;
-	font-family: "Microsoft Yahei";
+	font-family: "Microsoft Yahei", Arial, Helvetica;
+	
+}
+body {
+	font-size: 14px;
+	color: #225599;
 }
 a {
 	text-decoration: none;
 }
 ul {
+	padding-left: 10px;
 	list-style: none;
+}
+h3 {
+	font-weight: normal;
+	color: #646464;
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+h4 {
+	font-weight: normal;
+	color: #777777;
+	font-size: 16px;
+	margin-bottom: 5px;
+}
+h5 {
+	font-weight: normal;
+	color: #999999;
+	font-size: 14px;
+	margin-bottom: 2px;
 }
 #navi {
 	background: #0078d8;
@@ -21,10 +45,38 @@ ul {
 	text-align: right;
 }
 #navi li {
+	color: #ffffff;
 	display: inline-block;
 	margin-left: 10px;
 }
 .container {
 	width: 1080px;
 	margin: 40 auto;
+}
+.download_button {
+	display: block;
+	width: 150px;
+	height: 30px;
+	border-radius: 5px;
+	background: #0064B4;
+	border-width: 1px;
+	border-color: #0064B4;
+	color: #ffffff;
+	text-align: center;
+	line-height: 30px;
+	margin-top: 5px;
+}
+input {
+	font-size: 14px;
+}
+input[type = "submit"] {
+	margin-top: 10px;
+	padding: 0;
+	font-size: 14px;
+	border: none;
+	width: 150px;
+	height: 30px;
+	background: #0078d8;
+	border-radius: 5px;
+	color: #ffffff;
 }

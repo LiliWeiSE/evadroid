@@ -19,64 +19,62 @@
 		return;
 	}
 	ArrayList<App> appList = App.getCertainApps(5);
-	AppProfile myAP = null;
-	TestRecordDetail record = null;
-	ArrayList<TestRecord> myRList = TestRecord.getByTid(profile.getId());
 	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	String index = null;
+	if(profile.getType() == 0)
+		index = "\"myEvaTester.jsp\"";
+	else
+		index = "\"myEvaDeveloper.jsp\"";
 %>
 
 <html>
 	<head>
 		<title>EvaDroid|我的主页</title>
-		<link rel="stylesheet" type="text/css" href="css/tester.css">
+		<link rel="stylesheet" type="text/css" href="css/explore.css">
 		<link rel="stylesheet" type="text/css" href="css/general.css">
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 	</head>
 	<body>
 		<div id="navi">
 			<ul>
-				<li><a href="myEvaTester.jsp">首页</a></li>
+				<li><a href=<%= index%>>首页</a></li>
 				<li><a href="explore.jsp">发现</a></li>
-				<li><a href="">设置</a></li>
-				<li><%= profile.getName()%>，<%= profile.getCredit()%>分</li>
+				<li><a href="settings.jsp">设置</a></li>
+				<%if(profile.getType() == 1) {%>
+				<li><a href="toolkit.jsp">安卓工具包下载</a></li>
+				<li><a href="documentation.jsp">文档</a></li>
+				<%}%>
+				<li><%= profile.getName()%><%if(profile.getType() == 0)
+												out.print("， " + profile.getCredit() + "分"); %></li>
 				<li><a href="process/logout.jsp">退出</a></li>
 			</ul>
 		</div>
 		<div id="myrecord" class="container">
-			<h3>我评分的App</h3>
-			<ul>
-				<%
-					for (int i = myRList.size() - 1; i >= 0; i--) {
-						record = myRList.get(i).getTestRecordDetail();
-						myAP = App.getAppById(record.getAid()).getAppProfile();
-						%>
-						<li>
-						<a href=<%= "\"testRecord.jsp?id=" + record.getId() + "\""%>><%= myAP.getName()%></a>
-						<span class="time"><%= df.format(record.getTime())%></span><br/>
-						<span class="score">评分: <%= record.getScore() == -1?"尚未评分":record.getScore()%></span>
-						</li>
-				<%
-					}
-				%>
-
-			</ul>
 			<h3>最新的App</h3>
 			<ul id="allApps">
 				<%
 				AppProfile appProfile = null;
+				String description = null;
 				for (int i = 0; i < appList.size(); i++) {
 					appProfile = appList.get(i).getAppProfile();
-					out.println("<li>");
-					out.print("<a href=\"app.jsp?id=" + appProfile.getId() + "\">");
-					out.print(appProfile.getName());
-					out.print("</a>");
-					out.print("<span class=\"time\">");
-					out.print(df.format(appProfile.getTime()));
-					out.println("</span><br/>");
-					out.println("</li>");
+					description = appProfile.getDescription();
+					if (description.length()>50) {
+						description = description.substring(0, 50);
+					}
+					%>
+					<li>
+					<a href=<%="\"app.jsp?id=" + appProfile.getId() + "\""%>>
+					<%= appProfile.getName()%>
+					</a>
+					<span class="time"><%=df.format(appProfile.getTime())%></span>
+					<span class="description"><%= description%></span>
+					</li>
+				<%
 				}
 				%>
 			</ul>
+			<h3>热门App</h3>
+
 		</div>
 	</body>
 </html>

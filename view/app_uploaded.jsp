@@ -7,6 +7,7 @@
 <%
 	User user = null;
 	UserProfile profile = null;
+	AppProfile appProfile = new AppProfile();
 	try {
 		user = (User)session.getAttribute("user");
 		profile = user.getUserProfile();
@@ -18,15 +19,8 @@
 		out.println("</script>");
 		return;
 	}
-	AppProfile appProfile = (AppProfile)session.getAttribute("appProfile");
-
-	if (appProfile == null) {
-		out.println("<script type=\"text/javascript\">");
-		out.println("alert(\"上传出错，请重新上传！\")");	
-		out.println("location.href = 'upload.jsp';");
-		out.println("</script>");
-		return;
-	}
+	String url = request.getParameter("url");
+	String icon = request.getParameter("icon");
 	String name = request.getParameter("name");
 	String description = request.getParameter("description");
 	String task = request.getParameter("task");
@@ -39,12 +33,18 @@
 		out.println("</script>");
 		return;
 	}
-	appProfile.setDate(new Date());
+	appProfile.setUid(profile.getId());
+	appProfile.setUrl(url);
+	appProfile.setIcon(icon);
+	appProfile.setTime(new Date(System.currentTimeMillis()));
 	appProfile.setName(name);
 	appProfile.setDescription(description);
 	appProfile.setTask(task);
-	appProfile.setPoint(point);
+	appProfile.setPoint(intPoint);
 
 	App.insertApp(appProfile);
-	out.println("finish");
+	out.println("<script type=\"text/javascript\">");
+		out.println("alert(\"App添加成功\")");	
+		out.println("location.href = 'myEvaDeveloper.jsp';");
+		out.println("</script>");
 %>

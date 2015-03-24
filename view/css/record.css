@@ -1,0 +1,7 @@
+#left, #right {
+	display: inline-block;
+	vertical-align: text-top;
+}
+#left {
+	width: 200px;
+}

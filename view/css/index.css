@@ -14,6 +14,7 @@ body {
 	margin-bottom: 10px;
 }
 .textfield {
+	width: 149px;
 	padding: 8px;
 	border-radius: 5px;
 	border:none;

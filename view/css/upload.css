@@ -1,0 +1,22 @@
+.textfield {
+	margin: 10px 0;
+	width: 149px;
+	padding: 8px;
+	border-radius: 5px;
+	border-width: 1px;
+}
+textarea {
+	margin: 10px 0;
+	width: 600px;
+	height: 200px;
+}
+#left, #right {
+	display: inline-block;
+	vertical-align: text-top;
+}
+#left {
+	width: 200px;
+}
+select {
+	margin: 10px 0;
+}

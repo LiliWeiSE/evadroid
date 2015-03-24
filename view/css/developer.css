@@ -8,3 +8,14 @@
 .time {
 	float: right;
 }
+#upload {
+	display: inline-block;
+	width: 150px;
+	height: 16px;
+	background: url(../img/add.png) no-repeat left center;
+	padding-left: 20px;
+	color: #0078d8;
+	line-height: 16px;
+	font-size: 14px;
+}
+

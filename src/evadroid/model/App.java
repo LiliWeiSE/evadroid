@@ -20,14 +20,14 @@ public class App {
 	public static App insertApp(AppProfile ap) throws Exception{
 		int id = 0;
 		DBQ dbq = new DBQ(
-				"INSERT INTO app (uid, name, description, url, icon, task, time, point) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+				"INSERT INTO app (uid, name, description, url, icon, task, point) VALUES( ?, ?, ?, ?, ?, ?, ?)");
 		dbq.set(ap.getUid());
 		dbq.set(ap.getName());
 		dbq.set(ap.getDescription());
 		dbq.set(ap.getUrl());
 		dbq.set(ap.getIcon());
 		dbq.set(ap.getTask());
-		dbq.set(ap.getTime());
+		//dbq.set(ap.getTime());
 		dbq.set(ap.getPoint());
 		
 		try {
@@ -93,7 +93,27 @@ public class App {
 	}
 	
 	public static ArrayList<App> getCertainApps(int number) throws Exception {
-		return (ArrayList<App>) getAllApps().subList(0, number);
+		ArrayList<App> cApp = new ArrayList<App>();
+		DBQ dbq = new DBQ("SELECT * FROM app ORDER BY time DESC");
+		ResultSet rs = dbq.query();
+		int i = 0;
+		while(rs.next() && i <number) {
+			App app = new App(
+						new AppProfile(
+							rs.getInt("id"), 
+							rs.getInt("uid"),
+							rs.getString("name"),
+							rs.getString("description"),
+							rs.getString("url"),
+							rs.getString("icon"),
+							rs.getString("task"),
+							rs.getDate("time"),
+							rs.getInt("point"))
+					);
+			cApp.add(app);
+			i++;
+		}
+		return cApp;
 	}
 	
 	public static ArrayList<App> getAppsByUid(int uid) throws Exception {
@@ -122,14 +142,14 @@ public class App {
 	
 	public boolean update() throws Exception {
 		DBQ dbq = new DBQ(
-				"UPDATE app SET uid=?, description=?, url=?, icon=?, task=?, time=?, point=? WHERE id=?");
+				"UPDATE app SET uid=?, description=?, url=?, icon=?, task=?, point=? WHERE id=?");
 		dbq.set(appProfile.getUid());
 		dbq.set(appProfile.getDescription());
 		dbq.set(appProfile.getUrl());
 		dbq.set(appProfile.getIcon());
 		dbq.set(appProfile.getTask());
 		dbq.set(appProfile.getId());
-		dbq.set(appProfile.getTime());
+		//dbq.set(appProfile.getTime());
 		dbq.set(appProfile.getPoint());
 		if (dbq.excute() != 1) {
 			dbq.close();

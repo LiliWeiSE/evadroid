@@ -1,0 +1,11 @@
+#center {
+	width: 600px;
+	margin: 20px auto;
+}
+#center p {
+	font-size: 20px;
+}
+#center a {
+	font-size: 14px;
+	color: #cccccc;
+}

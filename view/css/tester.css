@@ -1,8 +1,14 @@
 .score {
-	margin-top: 5px;
-	margin-bottom: 20px;
+	color: #999999;
+	font-size: 12px;
+	margin-top: 2px;
+	margin-bottom: 10px;
 	display: block;
 }
 .time {
 	float: right;
+	color: #999999;
+}
+#allApps li {
+	margin-bottom: 10px;
 }
