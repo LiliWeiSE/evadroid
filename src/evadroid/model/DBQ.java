@@ -26,7 +26,7 @@ public class DBQ {
 			getConfig();
 		}
 		conn = DriverManager.getConnection(  
-                "jdbc:mysql://" + server + ":3306/" + database + "?useUnicode=true&characterEncoding=utf-8",
+                "jdbc:mysql://" + server + ":3306/" + database + "?useEncoding=true&amp;useUnicode=true&amp;characterEncoding=utf-8",
                 username, password );
 		pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 	}
