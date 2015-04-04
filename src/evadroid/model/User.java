@@ -17,6 +17,33 @@ public class User {
 		this.userProfile = userProfile;
 	}
 
+	public static User getById(int id) throws Exception{
+		UserProfile up = null;
+
+		DBQ dbq = new DBQ("SELECT * FROM user WHERE id=?");
+		dbq.set(id);
+		ResultSet rs = null;
+		try {
+			rs = dbq.query();
+		}
+		catch (Exception e) {
+			dbq.close();
+			throw(e);
+		}
+		
+		if (rs.next()) {
+			up = new UserProfile(rs.getInt("id"), rs.getInt("type"),
+					rs.getString("email"), rs.getString("name"),
+					rs.getString("password"), rs.getInt("credit"));
+		} else {
+			dbq.close();
+			return null;
+		}
+
+		dbq.close();
+		return new User(up);
+	}
+	
 	public static User register(int type, String email, String name,
 			String password) throws Exception {
 		int id = 0;
@@ -88,5 +115,10 @@ public class User {
 			}
 			dbq.close();
 			return true;
+	}
+	
+	public boolean getCredit(int credit) throws Exception {
+		userProfile.setCredit(userProfile.getCredit() + credit);
+		return update();
 	}
 }
