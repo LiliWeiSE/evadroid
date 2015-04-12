@@ -43,6 +43,7 @@ public class MyXMLParser {
 		return id;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void readAndSave(String filePath) throws Exception {
 		Element root = doc.getRootElement();
 		
@@ -90,8 +91,8 @@ public class MyXMLParser {
 			}
 			else if(name == "Event") {
 				//add event
-				String EventType = element.element("Type").getText();
-				String EventName = element.element("Name").getText();
+				String EventType = element.element("type").getText();
+				String EventName = element.element("name").getText();
 				
 				edge = new EventEdge(EventType, EventName);
 			}

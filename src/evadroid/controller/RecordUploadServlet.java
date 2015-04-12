@@ -31,18 +31,19 @@ public class RecordUploadServlet extends HttpServlet {
         System.out.println("inside doPost");
 		
 
-        BufferedReader in = new BufferedReader(
-                   new InputStreamReader(request.getInputStream()));
-            
-        String line = null;
-        while((line = in.readLine()) != null) {
-           System.out.println(line);
-        }
+//        BufferedReader in = new BufferedReader(
+//                   new InputStreamReader(request.getInputStream()));
+//            
+//        String line = null;
+//        while((line = in.readLine()) != null) {
+//           System.out.println(line);
+//        }
+//        in.close();
         // gets absolute path of the web application
         String appPath = request.getServletContext().getRealPath("/");
         // constructs path of the directory to save uploaded file
         String savePath = appPath + "myFile/record/";
-        String resultPath = appPath + "muFile/result";
+        String resultPath = appPath + "myFile/result/";
          
         // creates the save directory if it does not exists
         File fileSaveDir = new File(savePath);
@@ -66,11 +67,14 @@ public class RecordUploadServlet extends HttpServlet {
         out.println(savePath + fileName);
         
         filePath = savePath + fileName;
-        
-        execute(resultPath);
+        try{
+        	execute(resultPath);
+        } catch(Exception e) {
+        	e.printStackTrace(out);
+        }
     }
 	
-	private void execute(String resultPath) {
+	private void execute(String resultPath) throws Exception{
 		MyXMLParser parser = new MyXMLParser(filePath);
 		int tid = parser.getTid();
 		int aid = parser.getAid();
