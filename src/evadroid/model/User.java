@@ -103,12 +103,13 @@ public class User {
 
 	public boolean update() throws Exception {
 			DBQ dbq = new DBQ(
-					"UPDATE user SET password=?, name=?, type=?, credit=? WHERE id=?");
+					"UPDATE user SET email=?, password=?, name=?, type=?, credit=? WHERE id=?");
+			dbq.set(userProfile.getEmail());
 			dbq.set(userProfile.getPassword());
 			dbq.set(userProfile.getName());
 			dbq.set(userProfile.getType());
-			dbq.set(userProfile.getId());
 			dbq.set(userProfile.getCredit());
+			dbq.set(userProfile.getId());
 			if (dbq.excute() != 1) {
 				dbq.close();
 				return false;

@@ -63,7 +63,8 @@ public class App {
 							rs.getString("icon"),
 							rs.getString("task"),
 							rs.getDate("time"),
-							rs.getInt("point"))
+							rs.getInt("point"),
+							rs.getString("result"))
 					);
 		}
 		return app;
@@ -85,7 +86,8 @@ public class App {
 							rs.getString("icon"),
 							rs.getString("task"),
 							rs.getDate("time"),
-							rs.getInt("point"))
+							rs.getInt("point"),
+							rs.getString("result"))
 					);
 			allApp.add(app);
 		}
@@ -108,7 +110,8 @@ public class App {
 							rs.getString("icon"),
 							rs.getString("task"),
 							rs.getDate("time"),
-							rs.getInt("point"))
+							rs.getInt("point"),
+							rs.getString("result"))
 					);
 			cApp.add(app);
 			i++;
@@ -133,16 +136,30 @@ public class App {
 							rs.getString("icon"),
 							rs.getString("task"),
 							rs.getDate("time"),
-							rs.getInt("point"))
+							rs.getInt("point"),
+							rs.getString("result"))
 					);
 			userApp.add(app);
 		}
 		return userApp;
 	}
 	
+	public static boolean addResult(int id, String result) throws Exception {
+		DBQ dbq = new DBQ(
+				"UPDATE app SET result=? WHERE id=?");
+		dbq.set(result);
+		dbq.set(id);
+		if (dbq.excute() != 1) {
+			dbq.close();
+			return false;
+		}
+		dbq.close();
+		return true;
+	}
+	
 	public boolean update() throws Exception {
 		DBQ dbq = new DBQ(
-				"UPDATE app SET uid=?, description=?, url=?, icon=?, task=?, point=? WHERE id=?");
+				"UPDATE app SET uid=?, description=?, url=?, icon=?, task=?, point=?, result=? WHERE id=?");
 		dbq.set(appProfile.getUid());
 		dbq.set(appProfile.getDescription());
 		dbq.set(appProfile.getUrl());
@@ -151,6 +168,7 @@ public class App {
 		dbq.set(appProfile.getId());
 		//dbq.set(appProfile.getTime());
 		dbq.set(appProfile.getPoint());
+		dbq.set(appProfile.getResult());
 		if (dbq.excute() != 1) {
 			dbq.close();
 			return false;

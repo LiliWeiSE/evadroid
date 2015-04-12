@@ -12,6 +12,7 @@ public class AppProfile {
 	private String task;
 	private Date time;
 	private int point;
+	private String result;
 	
 	public AppProfile() {
 		this.id = -1;
@@ -23,6 +24,7 @@ public class AppProfile {
 		this.task = null;
 		this.time = null;
 		this.point = 0;
+		this.result = null;
 	}
 
 	public AppProfile(int id, int uid, String name, String description, String url,
@@ -36,6 +38,25 @@ public class AppProfile {
 		this.task = task;
 		this.time = time;
 		this.point = point;
+		this.result = null;
+	}
+	
+	
+
+	public AppProfile(int id, int uid, String name, String description,
+			String url, String icon, String task, Date time, int point,
+			String result) {
+		super();
+		this.id = id;
+		this.uid = uid;
+		this.name = name;
+		this.description = description;
+		this.url = url;
+		this.icon = icon;
+		this.task = task;
+		this.time = time;
+		this.point = point;
+		this.result = result;
 	}
 
 	public int getId() {
@@ -109,4 +130,13 @@ public class AppProfile {
 	public void setPoint(int point) {
 		this.point = point;
 	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+	
 }

@@ -42,6 +42,7 @@ public class RecordUploadServlet extends HttpServlet {
         String appPath = request.getServletContext().getRealPath("/");
         // constructs path of the directory to save uploaded file
         String savePath = appPath + "myFile/record/";
+        String resultPath = appPath + "muFile/result";
          
         // creates the save directory if it does not exists
         File fileSaveDir = new File(savePath);
@@ -66,10 +67,10 @@ public class RecordUploadServlet extends HttpServlet {
         
         filePath = savePath + fileName;
         
-        preExecute();
+        execute(resultPath);
     }
 	
-	private void preExecute() {
+	private void execute(String resultPath) {
 		MyXMLParser parser = new MyXMLParser(filePath);
 		int tid = parser.getTid();
 		int aid = parser.getAid();
@@ -79,6 +80,8 @@ public class RecordUploadServlet extends HttpServlet {
 		
 		int credit = ap.getPoint();
 		user.getCredit(credit);
+		
+		parser.readAndSave(resultPath);
 	}
     private String extractFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");
