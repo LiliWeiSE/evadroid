@@ -36,12 +36,10 @@ public class EvaToolkit {
         if(flag) {
             Intent intent = new Intent(context, GetTid.class);
             context.startActivity(intent);
-
-            String[] writeStr = {"<aid>" + aid +"</aid>"};
-
-            FileUtil.writeLinesToFile(filePath + fileName, writeStr, true);
+            String[] writeStr = {"<record>", "<aid>" + aid +"</aid>"};
+            FileUtil.writeLinesToFile(filePath + fileName, writeStr, false);
         }
-            String[] writeStr2 = {"<Activity>" + InitName +"</Activity>"};
+        String[] writeStr2 = {"<Activity>" + InitName +"</Activity>"};
         FileUtil.writeLinesToFile(filePath + fileName, writeStr2, true);
         flag = false;
     }
@@ -72,6 +70,10 @@ public class EvaToolkit {
     }
 
     public static void finish(){
-        (new UploadTask()).execute(filePath + fileName);
+        System.out.println("0" + filePath + fileName);
+        String[] writeStr = {"</record>"};
+        FileUtil.writeLinesToFile(filePath + fileName, writeStr, true);
+
+        (new UploadTask()).execute(new String[]{filePath + fileName});
     }
 }

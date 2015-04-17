@@ -10,7 +10,7 @@ public class ActivityNode implements Serializable{
 	ArrayList<EventEdge> edges;
 	public ActivityNode (String name) {
 		this.name = name;
-		count = 0;
+		count = 1;
 		edges = new ArrayList<EventEdge>();
 	}
 	
@@ -57,11 +57,12 @@ public class ActivityNode implements Serializable{
 				return;
 			}
 		}
+		
 		edges.add(edge);
 	}
 	
 	public boolean thesameas(ActivityNode ac) {
-		return name == ac.getName();
+		return name.equals(ac.getName());
 	}
 	
 }

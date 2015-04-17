@@ -32,7 +32,7 @@ public class GetTid extends Activity{
             @Override
             public void onClick(View v) {
                 String[] writeStr = {"<tid>" + editText.getText().toString() + "</tid>"};
-                FileUtil.writeLinesToFile(EvaToolkit.getFilePath() + EvaToolkit.getFileName(), writeStr, false);
+                FileUtil.writeLinesToFile(EvaToolkit.getFilePath() + EvaToolkit.getFileName(), writeStr, true);
                 finish();
             }
         });

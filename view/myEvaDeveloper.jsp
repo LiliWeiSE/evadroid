@@ -26,7 +26,7 @@
 
 <html>
 	<head>
-		<title>Evadroid|我的主页</title>
+		<title>Evadroid | 我的主页</title>
 		<link rel="stylesheet" type="text/css" href="css/general.css">
 		<link rel="stylesheet" type="text/css" href="css/developer.css">
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
@@ -52,7 +52,7 @@
 				for (int i = appList.size() - 1; i >= 0; i--) {
 					appProfile = appList.get(i).getAppProfile();
 					out.println("<li>");
-					out.print("<a href=\"\">");
+					out.print("<a href=\"result.jsp?aid=" + appProfile.getId() + "\">");
 					out.print(appProfile.getName());
 					out.print("</a>");
 					out.print("<span class=\"time\">");

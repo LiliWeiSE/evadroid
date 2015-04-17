@@ -46,7 +46,7 @@ public class EventEdge implements Serializable{
 	}
 	
 	public boolean thesameas(EventEdge ed) {
-		return type == ed.getType() && name == ed.getName() && des == ed.getDes();
+		return type.equals(ed.getType()) && name.equals(ed.getName()) && des == ed.getDes();
 	}
 	
 	public void increase() {
