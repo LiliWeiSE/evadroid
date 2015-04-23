@@ -41,6 +41,28 @@ public class TestRecord {
 		
 		return new TestRecord(new TestRecordDetail(id, aid, tid, -1, null));
 	}
+	public static int getAverage(int aid) throws Exception{
+		DBQ dbq = new DBQ(
+				"SELECT AVG(score) FROM testrecord WHERE aid=?");
+		dbq.set(aid);
+		
+		ResultSet rs = dbq.query();
+		if(rs.next()) {
+			return rs.getInt(1);
+		}
+		return -1;
+	}
+	public static int getCount(int aid) throws Exception{
+		DBQ dbq = new DBQ(
+				"SELECT COUNT(score) FROM testrecord WHERE aid=?");
+		dbq.set(aid);
+		
+		ResultSet rs = dbq.query();
+		if(rs.next()) {
+			return rs.getInt(1);
+		}
+		return -1;
+	}
 	public static ArrayList<TestRecord> getByAid(int aid) throws Exception{
 		DBQ dbq = new DBQ(
 				"SELECT * FROM testrecord WHERE aid=?");

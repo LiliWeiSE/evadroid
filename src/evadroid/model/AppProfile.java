@@ -13,6 +13,7 @@ public class AppProfile {
 	private Date time;
 	private int point;
 	private String result;
+	private String xml;
 	
 	public AppProfile() {
 		this.id = -1;
@@ -25,6 +26,7 @@ public class AppProfile {
 		this.time = null;
 		this.point = 0;
 		this.result = null;
+		this.xml = null;
 	}
 
 	public AppProfile(int id, int uid, String name, String description, String url,
@@ -45,7 +47,7 @@ public class AppProfile {
 
 	public AppProfile(int id, int uid, String name, String description,
 			String url, String icon, String task, Date time, int point,
-			String result) {
+			String result, String xml) {
 		super();
 		this.id = id;
 		this.uid = uid;
@@ -57,6 +59,7 @@ public class AppProfile {
 		this.time = time;
 		this.point = point;
 		this.result = result;
+		this.xml = xml;
 	}
 
 	public int getId() {
@@ -138,5 +141,12 @@ public class AppProfile {
 	public void setResult(String result) {
 		this.result = result;
 	}
-	
+
+	public String getXml() {
+		return xml;
+	}
+
+	public void setXml(String xml) {
+		this.xml = xml;
+	}
 }

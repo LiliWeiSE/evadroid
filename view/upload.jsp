@@ -25,14 +25,13 @@
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 		<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
 		<script type="text/javascript" src="js/jquery.uploadify.min.js"></script>
-		<script type="text/javascript" src="js/upload.js"></script>
 	</head>
 	<body>
 		<div id="navi">
 			<ul>
 				<li><a href="index.jsp">首页</a></li>
 				<li><a href="explore.jsp">发现</a></li>
-				<li><a href="settings.jsp">设置</a></li>
+				<li><a href="settings.jsp">修改密码</a></li>
 				<li><a href="toolkit.jsp">安卓工具包下载</a></li>
 				<li><a href="documentation.jsp">文档</a></li>
 				<li><%= profile.getName()%></li>

@@ -64,7 +64,8 @@ public class App {
 							rs.getString("task"),
 							rs.getDate("time"),
 							rs.getInt("point"),
-							rs.getString("result"))
+							rs.getString("result"),
+							rs.getString("xml"))
 					);
 		}
 		return app;
@@ -87,7 +88,8 @@ public class App {
 							rs.getString("task"),
 							rs.getDate("time"),
 							rs.getInt("point"),
-							rs.getString("result"))
+							rs.getString("result"),
+							rs.getString("xml"))
 					);
 			allApp.add(app);
 		}
@@ -111,7 +113,8 @@ public class App {
 							rs.getString("task"),
 							rs.getDate("time"),
 							rs.getInt("point"),
-							rs.getString("result"))
+							rs.getString("result"),
+							rs.getString("xml"))
 					);
 			cApp.add(app);
 			i++;
@@ -137,7 +140,8 @@ public class App {
 							rs.getString("task"),
 							rs.getDate("time"),
 							rs.getInt("point"),
-							rs.getString("result"))
+							rs.getString("result"),
+							rs.getString("xml"))
 					);
 			userApp.add(app);
 		}
@@ -159,16 +163,17 @@ public class App {
 	
 	public boolean update() throws Exception {
 		DBQ dbq = new DBQ(
-				"UPDATE app SET uid=?, description=?, url=?, icon=?, task=?, point=?, result=? WHERE id=?");
+				"UPDATE app SET uid=?, description=?, url=?, icon=?, task=?, point=?, result=?, xml=? WHERE id=?");
 		dbq.set(appProfile.getUid());
 		dbq.set(appProfile.getDescription());
 		dbq.set(appProfile.getUrl());
 		dbq.set(appProfile.getIcon());
 		dbq.set(appProfile.getTask());
-		dbq.set(appProfile.getId());
 		//dbq.set(appProfile.getTime());
 		dbq.set(appProfile.getPoint());
 		dbq.set(appProfile.getResult());
+		dbq.set(appProfile.getXml());
+		dbq.set(appProfile.getId());
 		if (dbq.excute() != 1) {
 			dbq.close();
 			return false;

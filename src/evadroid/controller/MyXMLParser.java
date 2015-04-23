@@ -103,4 +103,55 @@ public class MyXMLParser {
 		//save to DB
 		App.addResult(aid, fileUrl);
 	}
+	
+	public ArrayList<ActivityNode> readSingleFile() {
+		ArrayList<ActivityNode> activityList = new ArrayList<ActivityNode>();
+		Element root = doc.getRootElement();
+		
+		Iterator it = root.elementIterator();
+		ActivityNode activity = null, preActivity = null;
+		EventEdge edge = null;
+		
+		while (it.hasNext()) {
+			Element element = (Element)it.next();
+			String name = element.getName();
+			if(name == "Activity"){
+				//add activity
+				String activityName = element.getText();
+				preActivity = activity;
+				activity = new ActivityNode(activityName);
+				if(activityList.isEmpty()){
+					activityList.add(activity);
+				}
+				else{
+					//遍历找到Activity
+					int size = activityList.size();
+					int i;
+					for(i = 0; i < size;i++){
+						if(activityList.get(i).thesameas(activity))
+							break;
+					}
+					if(i == size)
+						activityList.add(activity);
+					else
+					{
+						activity = activityList.get(i);
+						activity.increase();
+					}
+					if(edge != null) {
+						edge.setDes(i);
+						preActivity.addEdge(edge);
+					}
+				}
+			}
+			else if(name == "Event") {
+				//add event
+				String EventType = element.element("type").getText();
+				String EventName = element.element("name").getText();
+				
+				edge = new EventEdge(EventType, EventName);
+			}
+		}
+		return activityList;
+	}
 }

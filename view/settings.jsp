@@ -21,6 +21,7 @@
 		out.println("</script>");
 		return;
 	}
+	String index = null;
 	if(profile.getType() == 0)
 		index = "\"myEvaTester.jsp\"";
 	else
@@ -30,16 +31,16 @@
 <html>
 	<head>
 		<title>Evadroid | 文档</title>
-		<link rel="stylesheet" type="text/css" href="css/temp.css">
+		<link rel="stylesheet" type="text/css" href="css/settings.css">
 		<link rel="stylesheet" type="text/css" href="css/general.css">
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 	</head>
 	<body>
 		<div id="navi">
 			<ul>
-				<li><a href="myEvaDeveloper.jsp">首页</a></li>
+				<li><a href=<%= index%>>首页</a></li>
 				<li><a href="explore.jsp">发现</a></li>
-				<li><a href="settings.jsp">设置</a></li>
+				<li><a href="settings.jsp">修改密码</a></li>
 				<%if(profile.getType() == 1) {%>
 				<li><a href="toolkit.jsp">安卓工具包下载</a></li>
 				<li><a href="documentation.jsp">文档</a></li>
@@ -50,8 +51,12 @@
 			</ul>
 		</div>
 		<div id="center">
-			<p>努力建设中，客官稍安勿躁！</p><br>
-			<a href="myEvaTester.jsp">返回首页</a>
+			<form method="post" action="process/changePWD.jsp">
+				<label>旧密码<br><input type="password" name="old_pwd" class="textfield"></label><br>
+				<label>新密码<br><input type="password" name="pwd" class="textfield"></label><br>
+				<label>密码确认<br><input type="password" name="pwd_cfm" class="textfield"></label><br>
+				<input type="submit" value="完成">
+			</form>
 		</div>
 	</body>
 </html>

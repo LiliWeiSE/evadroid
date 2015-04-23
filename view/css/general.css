@@ -36,7 +36,7 @@ h5 {
 	background: #0078d8;
 }
 #navi ul, #navi a {
-	width: 1080px;
+	width: 960px;
 	height: 50px;
 	margin: 0 auto;
 	color: #ffffff;
@@ -50,7 +50,7 @@ h5 {
 	margin-left: 10px;
 }
 .container {
-	width: 1080px;
+	width: 960px;
 	margin: 40 auto;
 }
 .download_button {

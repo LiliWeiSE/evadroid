@@ -1,0 +1,11 @@
+#center {
+	width: 600px;
+	margin: 20px auto;
+}
+.textfield {
+	margin: 10px 0;
+	width: 200px;
+	padding: 8px;
+	border-radius: 5px;
+	border-width: 1px;
+}

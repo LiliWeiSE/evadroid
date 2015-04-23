@@ -8,8 +8,9 @@
 <html>
 <head>
 	<title>EvaDroid</title>
-	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link rel="stylesheet" type="text/css" href="css/general.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 	<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
@@ -20,7 +21,7 @@
 		<div id="signin" action="/signin/index.jsp">
 			<span>登录</span>
 			<a href="#signup" id="tosignup">注册</a>
-			<form method="post">
+			<form method="post" action="/signin/index.jsp">
 				<!--label>用户名</label><br/-->
 				<input class="textfield" type="text" name="username" placeholder="用户名"><br/>
 				<!--label>密码</label><br/-->

@@ -35,10 +35,10 @@
 			<ul>
 				<li><a href="myEvaDeveloper.jsp">首页</a></li>
 				<li><a href="explore.jsp">发现</a></li>
-				<li><a href="settings.jsp">设置</a></li>
-				<li><%= profile.getName()%></li>
+				<li><a href="settings.jsp">修改密码</a></li>
 				<li><a href="toolkit.jsp">EvaDroid安卓工具包</a></li>
 				<li><a href="documentation.jsp">文档</a></li>
+				<li><%= profile.getName()%></li>
 				<li><a href="process/logout.jsp">退出</a></li>
 			</ul>
 		</div>

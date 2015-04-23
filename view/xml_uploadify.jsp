@@ -19,7 +19,7 @@ import = "java.util.Date"%>
    int maxMemSize = 50000 * 1024;
    ServletContext context = pageContext.getServletContext();
    //String filePath = context.getInitParameter("file-upload");
-   String filePath = context.getRealPath("/") + "myFile/icon/";
+   String filePath = context.getRealPath("/") + "myFile/xml/";
    //String filePath = "/tmp/";
 
    // Verify the content type
@@ -42,7 +42,7 @@ import = "java.util.Date"%>
          // Process the uploaded file items
          Iterator i = fileItems.iterator();
 
-         while ( i.hasNext () ) 
+         while ( i.hasNext () )
          {
             FileItem fi = (FileItem)i.next();
             if ( !fi.isFormField () )  
@@ -56,7 +56,8 @@ import = "java.util.Date"%>
                fileName = df.format(new Date()) + fileName.substring( fileName.lastIndexOf("\\") + 1);
                file = new File(filePath + fileName);
                fi.write( file ) ;
-               out.print("myFile/icon/"+ fileName);
+               out.print("myFile/xml/"+ fileName);
+            }
          }
       }catch(Exception ex) {
       }
