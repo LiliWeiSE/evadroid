@@ -39,17 +39,17 @@
 	}
 
 	if (exist_xml) {
-		//try{
+		try{
 			parser = new MyXMLParser(request.getServletContext().getRealPath("/") + appProfile.getXml());
 			activityList_xml = parser.readSingleFile();
 			it_xml = activityList_xml.iterator();
-		//}
-		//catch(Exception e) {
-		//	out.println("<script type=\"text/javascript\">");
-		//	out.println("alert(\"标准图xml文件格式有误，请重新上传！\")");	
-		//	out.println("</script>");
-		//	exist_xml = false;
-		//}
+		}
+		catch(Exception e) {
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert(\"标准图xml文件格式有误，请重新上传！\")");	
+			out.println("</script>");
+			exist_xml = false;
+		}
 	}
 
 %>
@@ -89,6 +89,7 @@
 				<h4>App信息</h4>
 				<p>名称: <%= appProfile.getName()%></p>
 				<p>id: <%= appProfile.getId()%> (请在使用安卓工具包时传入此参数)</p>
+				<a href=<%="\"analysis.jsp?aid=" + aid + "\""%> class="download_button">查看分析结果</a>
 				<h4>上传apk文件</h4>
 				<form action="apk_uploadify.jsp" method="post" enctype="multipart/form-data">
 					<div id="queue"></div>
@@ -163,7 +164,7 @@
 					g.addEdge(<%= i%>, <%= edge.getDes()%>, eLabel);
 			<%}i++;}%>
 			var layouter = new Graph.Layout.Spring(g);
-			var renderer = new Graph.Renderer.Raphael('canvas1', g, 750, 500);
+			var renderer = new Graph.Renderer.Raphael('canvas1', g, 730, 500);
 			layouter.layout();
 			renderer.draw();
 			redraw = function() {
@@ -205,7 +206,7 @@
 			%>
 
 			var layouter_xml = new Graph.Layout.Spring(g_xml);
-			var renderer_xml = new Graph.Renderer.Raphael('canvas2', g_xml, 750, 500);
+			var renderer_xml = new Graph.Renderer.Raphael('canvas2', g_xml, 730, 500);
 			layouter_xml.layout();
 			renderer_xml.draw();
 			redraw_xml = function() {

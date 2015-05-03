@@ -17,6 +17,9 @@ textarea {
 #left {
 	width: 200px;
 }
+#right {
+	margin-left: 20px;
+}
 select {
 	margin: 10px 0;
 }
