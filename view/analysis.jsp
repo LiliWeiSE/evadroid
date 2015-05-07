@@ -29,7 +29,8 @@
 	boolean exist = appProfile.getResult() != null && !appProfile.getResult().equals("");
 	boolean exist_xml = appProfile.getXml() != null && !appProfile.getXml().equals("");
 	ArrayList<ActivityNode> activityList = null, activityList_xml = null;
-	Iterator<ActivityInfo> it = null;
+	Iterator<ActivityInfo> it_a = null;
+	Iterator<EventInfo> it_e = null;
 	MyXMLParser parser = null;
 
 	if (exist && exist_xml) {
@@ -46,8 +47,10 @@
 			return;
 		}
 		AnalysisUtil analysis = new AnalysisUtil(activityList_xml, activityList);
-		ArrayList<ActivityInfo> infoList = analysis.getRedundantActivity();
-		it = infoList.iterator();
+		ArrayList<ActivityInfo> activityInfoList = analysis.getRedundantActivity();
+		ArrayList<EventInfo> eventInfoList = analysis.getRedundantEvent();
+		it_a = activityInfoList.iterator();
+		it_e = eventInfoList.iterator();
 	}
 	else {
 		out.println("<script type=\"text/javascript\">");
@@ -80,13 +83,35 @@
 			<h3>误入最多的Activity</h3>
 			<ul>
 			<%
-			while (it.hasNext()) {
-				ActivityInfo info = it.next();%>
-				<li>Activity名称: <%= info.getName()%><br />
+			int i = 1;
+			while (it_a.hasNext()) {
+				ActivityInfo info = it_a.next();%>
+				<li>
+					<h4>Activity <%= i%></h4>
+					Activity名称: <%= info.getName()%><br />
 					Activity出现次数: <%= info.getCount()%>
 				</li>
 			<%
-			}
+			i++;}
+			%>
+			</ul>
+
+			<h3>误触发最多的Event</h3>
+			<ul>
+			<%
+			i = 1;
+			while (it_e.hasNext()) {
+				EventInfo info = it_e.next();%>
+				<li>
+					<h4>Event <%= i%></h4>
+					Event名称: <%= info.getName()%><br />
+					Event类型: <%= info.getType()%><br />
+					触发时Activity: <%= info.getSrc()%><br />
+					触发后Activity: <%= info.getDes()%><br />
+					Event触发次数: <%= info.getCount()%>
+				</li>
+			<%
+			i++;}
 			%>
 			</ul>
 		</div>
