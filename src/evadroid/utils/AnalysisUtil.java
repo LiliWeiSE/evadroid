@@ -36,18 +36,36 @@ public class AnalysisUtil {
 		Iterator<ActivityNode> it_real = real.iterator(), it_ideal = null;
 		ArrayList<ActivityInfo> result = new ArrayList<ActivityInfo>();
 		while(it_real.hasNext()) {
-			ActivityNode real_node = it_real.next();
-			boolean flag = (idealContains(real_node) == null);
-//			it_ideal = ideal.iterator();
-//			while(it_ideal.hasNext()) {
-//				if(it_ideal.next().thesameas(real_node)){
-//					flag = true;
-//					break;
-//				}
-//			}
+			ActivityNode real_node = it_real.next(), ideal_node = idealContains(real_node);
+			boolean flag = (ideal_node == null);
 			if(flag) {
 				ActivityInfo info = new ActivityInfo(real_node.getName(),real_node.getCount());
 				result.add(info);
+			}
+			else {
+				int count = real_node.getCount() - real_node.getTotal() * ideal_node.getCount();
+				ActivityInfo info = new ActivityInfo(real_node.getName(),count);
+				Iterator<EventEdge> itEdge_ideal = ideal_node.getEdges().iterator(), itEdge_real = null;
+				int same_count = 0;
+				while(itEdge_ideal.hasNext()) {
+					EventEdge edge_ideal = itEdge_ideal.next();
+					itEdge_real = real_node.getEdges().iterator();
+					while(itEdge_real.hasNext()) {
+						EventEdge edge_real = itEdge_real.next();
+						if(edgesEqual(edge_real, edge_ideal)) {
+							same_count += (edge_ideal.getCount() * real_node.getTotal());
+							System.out.println("same_count: " + same_count);
+							break;
+						}
+					}
+				}
+				float rate = ((float)(real_node.getEdgeTotal() - same_count))/(float)real_node.getEdgeTotal();
+				System.out.println("total: " + real_node.getTotal());
+				System.out.println("edge_total: " + real_node.getEdgeTotal());
+				System.out.println("rate: " + rate);
+				info.setMistakeRate(rate);
+				if(count != 0 || rate > 0)
+					result.add(info);
 			}
 		}
 		//排序

@@ -51,12 +51,23 @@ public class MyXMLParser {
 		ActivityNode activity = null, preActivity = null;
 		EventEdge edge = null;
 		
-		int aid = getAid();
+		int aid = getAid(), total = 1;
 		String fileUrl = filePath + aid + "result.dat";
 		ArrayList<ActivityNode> activityList = (ArrayList<ActivityNode>)ObjectIOUtil.read(fileUrl);
-		if(activityList == null)
-			activityList = new ArrayList<ActivityNode>();		
-		
+		if(activityList == null) {
+			activityList = new ArrayList<ActivityNode>();
+		}
+		else{
+			total = activityList.get(0).getTotal() + 1;
+			Iterator<ActivityNode> temp = activityList.iterator();
+			while(temp.hasNext()) {
+				ActivityNode node = temp.next();
+				node.setTotal(total);
+			}
+		}
+		System.out.println(total);
+		String preName = null;
+		int i = 0;
 		while (it.hasNext()) {
 			Element element = (Element)it.next();
 			String name = element.getName();
@@ -64,14 +75,14 @@ public class MyXMLParser {
 				//add activity
 				String activityName = element.getText();
 				preActivity = activity;
-				activity = new ActivityNode(activityName);
+				activity = new ActivityNode(activityName, total);
 				if(activityList.isEmpty()){
 					activityList.add(activity);
 				}
 				else{
 					//遍历找到Activity
 					int size = activityList.size();
-					int i;
+					
 					for(i = 0; i < size;i++){
 						if(activityList.get(i).thesameas(activity))
 							break;
@@ -89,6 +100,15 @@ public class MyXMLParser {
 					}
 				}
 			}
+			else if(name == "Event" && preName == "Event"){
+				edge.setDes(i);
+				activity.addEdge(edge);
+				
+				String EventType = element.element("type").getText();
+				String EventName = element.element("name").getText();
+				
+				edge = new EventEdge(EventType, EventName);
+			}
 			else if(name == "Event") {
 				//add event
 				String EventType = element.element("type").getText();
@@ -96,6 +116,7 @@ public class MyXMLParser {
 				
 				edge = new EventEdge(EventType, EventName);
 			}
+			preName = name;
 		}
 		
 		//write
@@ -111,7 +132,8 @@ public class MyXMLParser {
 		Iterator it = root.elementIterator();
 		ActivityNode activity = null, preActivity = null;
 		EventEdge edge = null;
-		
+		int i = 0;
+		String preName = null;
 		while (it.hasNext()) {
 			Element element = (Element)it.next();
 			String name = element.getName();
@@ -119,14 +141,13 @@ public class MyXMLParser {
 				//add activity
 				String activityName = element.getText();
 				preActivity = activity;
-				activity = new ActivityNode(activityName);
+				activity = new ActivityNode(activityName, 1);
 				if(activityList.isEmpty()){
 					activityList.add(activity);
 				}
 				else{
 					//遍历找到Activity
 					int size = activityList.size();
-					int i;
 					for(i = 0; i < size;i++){
 						if(activityList.get(i).thesameas(activity))
 							break;
@@ -144,6 +165,15 @@ public class MyXMLParser {
 					}
 				}
 			}
+			else if(name == "Event" && preName == "Event"){
+				edge.setDes(i);
+				activity.addEdge(edge);
+				
+				String EventType = element.element("type").getText();
+				String EventName = element.element("name").getText();
+				
+				edge = new EventEdge(EventType, EventName);
+			}
 			else if(name == "Event") {
 				//add event
 				String EventType = element.element("type").getText();
@@ -151,6 +181,7 @@ public class MyXMLParser {
 				
 				edge = new EventEdge(EventType, EventName);
 			}
+			preName = name;
 		}
 		return activityList;
 	}

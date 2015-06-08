@@ -42,41 +42,47 @@
 				<li><a href="process/logout.jsp">退出</a></li>
 			</ul>
 		</div>
-		<div id="myrecord" class="container">
-			<h3>我评分的App</h3>
-			<ul>
-				<%
-					for (int i = myRList.size() - 1; i >= 0; i--) {
-						record = myRList.get(i).getTestRecordDetail();
-						myAP = App.getAppById(record.getAid()).getAppProfile();
-						%>
-						<li>
-						<a href=<%= "\"testRecord.jsp?id=" + record.getId() + "\""%>><%= myAP.getName()%></a>
-						<span class="time"><%= df.format(record.getTime())%></span><br/>
-						<span class="score">评分: <%= record.getScore() == -1?"尚未评分":record.getScore()%></span>
-						</li>
-				<%
-					}
-				%>
+		<div class="container">
+			<div id="left">
+				<h3>我评分的App</h3>
+				<ul>
+					<%
+						for (int i = myRList.size() - 1; i >= 0; i--) {
+							record = myRList.get(i).getTestRecordDetail();
+							myAP = App.getAppById(record.getAid()).getAppProfile();
+							%>
+							<li>
+							<a href=<%= "\"testRecord.jsp?id=" + record.getId() + "\""%>><%= myAP.getName()%></a>
+							<span class="time"><%= df.format(record.getTime())%></span><br/>
+							<span class="score">评分: <%= record.getScore() == -1?"尚未评分":record.getScore()%></span>
+							</li>
+					<%
+						}
+					%>
 
-			</ul>
-			<h3>最新的App</h3>
-			<ul id="allApps">
-				<%
-				AppProfile appProfile = null;
-				for (int i = 0; i < appList.size(); i++) {
-					appProfile = appList.get(i).getAppProfile();
-					out.println("<li>");
-					out.print("<a href=\"app.jsp?id=" + appProfile.getId() + "\">");
-					out.print(appProfile.getName());
-					out.print("</a>");
-					out.print("<span class=\"time\">");
-					out.print(df.format(appProfile.getTime()));
-					out.println("</span><br/>");
-					out.println("</li>");
-				}
-				%>
-			</ul>
+				</ul>
+				<h3>最新的App</h3>
+				<ul id="allApps">
+					<%
+					AppProfile appProfile = null;
+					for (int i = 0; i < appList.size(); i++) {
+						appProfile = appList.get(i).getAppProfile();
+						out.println("<li>");
+						out.print("<a href=\"app.jsp?id=" + appProfile.getId() + "\">");
+						out.print(appProfile.getName());
+						out.print("</a>");
+						out.print("<span class=\"time\">");
+						out.print(df.format(appProfile.getTime()));
+						out.println("</span><br/>");
+						out.println("</li>");
+					}
+					%>
+				</ul>
+			</div>
+			<div id="right">
+				<h4>我的用户id:<%= profile.getId()%></h4>
+				请在使用App时正确输入此id。
+			</div>
 		</div>
 	</body>
 </html>

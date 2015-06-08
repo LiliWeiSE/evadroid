@@ -6,14 +6,15 @@ import java.util.Iterator;
 
 public class ActivityNode implements Serializable{
 	String name;
+	int total;
 	int count;
 	ArrayList<EventEdge> edges;
-	public ActivityNode (String name) {
+	public ActivityNode (String name, int total) {
 		this.name = name;
+		this.total = total;
 		count = 1;
 		edges = new ArrayList<EventEdge>();
 	}
-	
 	
 	public String getName() {
 		return name;
@@ -45,6 +46,14 @@ public class ActivityNode implements Serializable{
 	}
 
 
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
 	public void increase(){
 		count++;
 	}
@@ -59,6 +68,15 @@ public class ActivityNode implements Serializable{
 		}
 		
 		edges.add(edge);
+	}
+	
+	public int getEdgeTotal() {
+		Iterator<EventEdge> it =  edges.iterator();
+		int eTotal = 0;
+		while(it.hasNext()) {
+			eTotal += it.next().getCount();
+		}
+		return eTotal;
 	}
 	
 	public boolean thesameas(ActivityNode ac) {

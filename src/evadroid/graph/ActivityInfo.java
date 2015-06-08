@@ -3,6 +3,7 @@ package evadroid.graph;
 public class ActivityInfo implements Comparable{
 	private String name = null;
 	private int count = 0;
+	private float mistakeRate = 1;
 	public ActivityInfo(String name, int count) {
 		super();
 		this.name = name;
@@ -19,6 +20,12 @@ public class ActivityInfo implements Comparable{
 	}
 	public void setCount(int count) {
 		this.count = count;
+	}
+	public float getMistakeRate() {
+		return mistakeRate;
+	}
+	public void setMistakeRate(float mistakeRate) {
+		this.mistakeRate = mistakeRate;
 	}
 	@Override
 	public int compareTo(Object o) {

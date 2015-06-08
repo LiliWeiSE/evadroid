@@ -80,40 +80,49 @@
 			</ul>
 		</div>
 		<div class="container">
-			<h3>误入最多的Activity</h3>
-			<ul>
+			<h3>App评分</h3>
+			<p>评分次数: <%= TestRecord.getCount(aid)%></p>
+			<p>平均分: <%= TestRecord.getAverage(aid)%></p>
+			<h3>Activity 分析结果</h3>
+			<table>
+				<tr>
+					<td>Activity 名称</td>
+					<td>冗余次数</td>
+					<td>Activity 内误触发事件概率</td>
+				</tr>
 			<%
-			int i = 1;
 			while (it_a.hasNext()) {
 				ActivityInfo info = it_a.next();%>
-				<li>
-					<h4>Activity <%= i%></h4>
-					Activity名称: <%= info.getName()%><br />
-					Activity出现次数: <%= info.getCount()%>
-				</li>
-			<%
-			i++;}
+				<tr>
+					<td><%= info.getName()%></td>
+					<td><%= info.getCount()%></td>
+					<td><%= info.getMistakeRate()%></td>
+				</tr>
+			<%}
 			%>
-			</ul>
+			</table>
 
-			<h3>误触发最多的Event</h3>
-			<ul>
+			<h3>Event 分析结果</h3>
+			<table>
+				<tr>
+					<td>Event 名称</td>
+					<td>Event 类型</td>
+					<td>触发时 Activity</td>
+					<td>触发后 Activity</td>
+					<td>触发次数</td>
+				</tr>
 			<%
-			i = 1;
 			while (it_e.hasNext()) {
 				EventInfo info = it_e.next();%>
-				<li>
-					<h4>Event <%= i%></h4>
-					Event名称: <%= info.getName()%><br />
-					Event类型: <%= info.getType()%><br />
-					触发时Activity: <%= info.getSrc()%><br />
-					触发后Activity: <%= info.getDes()%><br />
-					Event触发次数: <%= info.getCount()%>
-				</li>
-			<%
-			i++;}
-			%>
-			</ul>
+				<tr>
+					<td><%= info.getName()%></td>
+					<td><%= info.getType()%></td>
+					<td><%= info.getSrc()%></td>
+					<td><%= info.getDes()%></td>
+					<td><%= info.getCount()%></td>
+				</tr>
+			<%}%>
+			</table>
 		</div>
 	</body>
 </html>

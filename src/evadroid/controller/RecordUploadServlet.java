@@ -70,20 +70,21 @@ public class RecordUploadServlet extends HttpServlet {
         try{
         	execute(resultPath);
         } catch(Exception e) {
-        	e.printStackTrace(out);
+        	e.printStackTrace(System.out);
         }
     }
 	
 	private void execute(String resultPath) throws Exception{
+		System.out.println("inside execute");
 		MyXMLParser parser = new MyXMLParser(filePath);
 		int tid = parser.getTid();
 		int aid = parser.getAid();
-		User user = User.getById(tid);
+		//User user = User.getById(tid);
 		
-		AppProfile ap = App.getAppById(aid).getAppProfile();
+		//AppProfile ap = App.getAppById(aid).getAppProfile();
 		
-		int credit = ap.getPoint();
-		user.getCredit(credit);
+		//int credit = ap.getPoint();
+		//user.getCredit(credit);
 		
 		parser.readAndSave(resultPath);
 	}

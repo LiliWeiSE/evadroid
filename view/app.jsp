@@ -33,6 +33,10 @@
 		index = "\"myEvaTester.jsp\"";
 	else
 		index = "\"myEvaDeveloper.jsp\"";
+	int index_n = 0;
+	String task = appProfile.getTask();
+	while((index_n = task.indexOf("\n"))!=-1)  
+ 		task = task.substring(0, index_n) + "<br />" + task.substring(index_n + 1); 
 %>
 <html>
 	<head>
@@ -74,7 +78,7 @@
 				<h4>App简介</h4>
 				<%=appProfile.getDescription()%>
 				<h4>任务描述</h4>
-				<%= appProfile.getTask()%><br />
+				<%= task%><br />
 
 				<h4>任务价值: <%= appProfile.getPoint()%></h4>
 			</div>

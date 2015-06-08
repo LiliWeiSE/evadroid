@@ -34,8 +34,13 @@
 	MyXMLParser parser = null;
 
 	if (exist) {
-		activityList = (ArrayList<ActivityNode>)ObjectIOUtil.read(appProfile.getResult());
-		it = activityList.iterator();
+		try{
+			activityList = (ArrayList<ActivityNode>)ObjectIOUtil.read(appProfile.getResult());
+			it = activityList.iterator();
+		}
+		catch(Exception e) {
+			exist = false;
+		}
 	}
 
 	if (exist_xml) {
@@ -111,9 +116,6 @@
 			</div>
 			
 			<div id="right">
-				<h4>App评分</h4>
-				<p>评分次数: <%= TestRecord.getCount(aid)%></p>
-				<p>平均分: <%= TestRecord.getAverage(aid)%></p>
 				<h4>App实际 Event Activity 图</h4>
 				<div id="canvas1">
 					<%if(!exist){

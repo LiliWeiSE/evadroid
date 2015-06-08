@@ -1,11 +1,11 @@
 * {
+	font-size: 14px;
 	margin: 0;
 	font-family: "Microsoft Yahei", Arial, Helvetica;
 	
 }
 body {
-	font-size: 14px;
-	color: #225599;
+	color: #666666;
 }
 a {
 	text-decoration: none;
@@ -16,19 +16,19 @@ ul {
 }
 h3 {
 	font-weight: normal;
-	color: #646464;
+	color: #005eaa;
 	font-size: 18px;
-	margin-bottom: 10px;
+	margin: 5px 0 10px 0;
 }
 h4 {
 	font-weight: normal;
-	color: #777777;
+	color: #006dc5;
 	font-size: 16px;
-	margin-bottom: 5px;
+	margin: 2px 0 5px 0;
 }
 h5 {
 	font-weight: normal;
-	color: #999999;
+	color: #0078d8;
 	font-size: 14px;
 	margin-bottom: 2px;
 }
@@ -79,4 +79,13 @@ input[type = "submit"] {
 	background: #0064B4;
 	border-radius: 5px;
 	color: #ffffff;
+}
+table {
+	text-align: center;
+	border-collapse:collapse;
+	border:none;
+}
+td {
+	border:solid #aaa 1px;
+	padding: 3px 5px;
 }
